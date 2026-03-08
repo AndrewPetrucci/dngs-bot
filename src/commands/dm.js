@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder, MessageFlags } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -25,7 +25,7 @@ export default {
       await targetUser.send(content);
       await interaction.reply({
         content: `Message sent to **${targetUser.tag}**.`,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     } catch (err) {
       const cannotDm =
@@ -35,7 +35,7 @@ export default {
         content: cannotDm
           ? `Could not DM **${targetUser.tag}** — they may have DMs disabled or have blocked the bot.`
           : `Something went wrong: ${err.message}`,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
   },
